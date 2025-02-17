@@ -9,7 +9,7 @@ erlang_builds_url() {
       erlang_builds_url="https://builds.hex.pm/builds/otp/ubuntu-22.04"
       ;;
     *)
-      xd="https://heroku-buildpack-elixir-em.s3.us-east-1.amazonaws.com"
+      erlang_builds_url="https://heroku-buildpack-elixir-em.s3.us-east-1.amazonaws.com"
       ;;
   esac
   echo $erlang_builds_url
