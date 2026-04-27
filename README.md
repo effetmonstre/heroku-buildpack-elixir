@@ -2,33 +2,34 @@
 
 ## Features
 
-* **Easy configuration** with `elixir_buildpack.config` file
-* Use **prebuilt Elixir binaries**
-* Allows configuring Erlang
-* If your app doesn't have a Procfile, default web task `mix run --no-halt` will be run.
-* Consolidates protocols
-* Hex and rebar support
-* Caching of Hex packages, Mix dependencies and downloads
-* Compilation procedure hooks through `hook_pre_compile`, `hook_compile`, `hook_post_compile` configuration
+- **Easy configuration** with `elixir_buildpack.config` file
+- Use **prebuilt Elixir binaries**
+- Allows configuring Erlang
+- If your app doesn't have a Procfile, default web task `mix run --no-halt` will be run.
+- Consolidates protocols
+- Hex and rebar support
+- Caching of Hex packages, Mix dependencies and downloads
+- Compilation procedure hooks through `hook_pre_compile`, `hook_compile`, `hook_post_compile` configuration
 
 #### Version support
 
-* Erlang - Prebuilt packages (17.5, 17.4, etc)
-  * The full list of prebuilt packages can be found here: 
-    * gigalixir-20 or heroku-20 stacks: https://builds.hex.pm/builds/otp/ubuntu-20.04/builds.txt
-    * heroku-22 stacks: https://builds.hex.pm/builds/otp/ubuntu-22.04/builds.txt
-    * All other stacks: https://github.com/HashNuke/heroku-buildpack-elixir-otp-builds/blob/master/otp-versions
-* Elixir - Prebuilt releases (1.0.4, 1.0.3, etc) or prebuilt branches (master, v1.7, etc)
-  * The full list of releases can be found here: https://github.com/elixir-lang/elixir/releases
-  * The full list of branches can be found here: https://github.com/elixir-lang/elixir/branches
+- Erlang - Prebuilt packages (17.5, 17.4, etc)
+  - The full list of prebuilt packages can be found here:
+    - gigalixir-20 or heroku-20 stacks: https://builds.hex.pm/builds/otp/ubuntu-20.04/builds.txt
+    - heroku-22 stacks: https://builds.hex.pm/builds/otp/ubuntu-22.04/builds.txt
+    - heroku-24 stacks: https://builds.hex.pm/builds/otp/ubuntu-24.04/builds.txt
+    - All other stacks: https://github.com/HashNuke/heroku-buildpack-elixir-otp-builds/blob/master/otp-versions
+- Elixir - Prebuilt releases (1.0.4, 1.0.3, etc) or prebuilt branches (master, v1.7, etc)
+  - The full list of releases can be found here: https://github.com/elixir-lang/elixir/releases
+  - The full list of branches can be found here: https://github.com/elixir-lang/elixir/branches
 
 Note: you should choose an Elixir and Erlang version that are [compatible with one another](https://hexdocs.pm/elixir/compatibility-and-deprecations.html#compatibility-between-elixir-and-erlang-otp).
 
 #### Cloud Native Support
 
-* Cloud Native users should use [this buildpack](https://github.com/elixir-buildpack/cloud-native-buildpack)
+- Cloud Native users should use [this buildpack](https://github.com/elixir-buildpack/cloud-native-buildpack)
 
-**This buildpack is not guaranteed to be Cloud Native compatible.** 
+**This buildpack is not guaranteed to be Cloud Native compatible.**
 The [elixir-buildpack/cloud-native-buildpack](https://github.com/elixir-buildpack/cloud-native-buildpack) is a buildpack that is actively under development
 and is designed specifically to follow the Cloud Native Buildpack conventions.
 
@@ -70,10 +71,10 @@ https://github.com/HashNuke/heroku-buildpack-elixir.git#883f33e10879b4b8b030753c
 
 #### Using Heroku CI
 
-This buildpack supports Heroku CI. 
+This buildpack supports Heroku CI.
 
-* To enable viewing test runs on Heroku, add [tapex](https://github.com/joshwlewis/tapex) to your project.
-* To detect compilation warnings use the `hook_compile` configuration option set to `mix compile --force --warnings-as-errors`.
+- To enable viewing test runs on Heroku, add [tapex](https://github.com/joshwlewis/tapex) to your project.
+- To detect compilation warnings use the `hook_compile` configuration option set to `mix compile --force --warnings-as-errors`.
 
 #### Elixir Releases
 
@@ -82,6 +83,7 @@ This buildpack can optionally build an [Elixir release](https://hexdocs.pm/mix/M
 WARNING: If you need to do further compilation using another buildpack, such as the [Phoenix static buildpack](https://github.com/gjaldon/heroku-buildpack-phoenix-static), you probably don't want to use this option. See the [Elixir release buildpack](https://github.com/chrismcg/heroku-buildpack-elixir-mix-release) instead.
 
 To build and use a release for an app called `foo` compiled with `MIX_ENV=prod`:
+
 1. Make sure `elixir_version` in `elixir_buildpack.config` is at least 1.9
 2. Add `release=true` to `elixir_buildpack.config`
 3. Use `web: _build/prod/rel/foo/bin/foo start` in your Procfile
@@ -94,8 +96,7 @@ Create a `elixir_buildpack.config` file in your app's root dir. The file's synta
 
 If you don't specify a config option, then the default option from the buildpack's [`elixir_buildpack.config`](https://github.com/HashNuke/heroku-buildpack-elixir/blob/master/elixir_buildpack.config) file will be used.
 
-
-__Here's a full config file with all available options:__
+**Here's a full config file with all available options:**
 
 ```
 # Erlang version
@@ -128,9 +129,10 @@ runtime_path=/app
 test_args="--cover"
 ```
 
-
 #### Migrating from previous build pack
+
 the following has been deprecated and should be removed from `elixir_buildpack.config`:
+
 ```
 # Export heroku config vars
 config_vars_to_export=(DATABASE_URL)
@@ -138,13 +140,13 @@ config_vars_to_export=(DATABASE_URL)
 
 #### Specifying Elixir version
 
-* Use prebuilt Elixir release
+- Use prebuilt Elixir release
 
 ```
 elixir_version=1.2.0
 ```
 
-* Use prebuilt Elixir branch, the *branch* specifier ensures that it will be downloaded every time
+- Use prebuilt Elixir branch, the _branch_ specifier ensures that it will be downloaded every time
 
 ```
 elixir_version=(branch master)
@@ -152,7 +154,7 @@ elixir_version=(branch master)
 
 #### Specifying Erlang version
 
-* You can specify an Erlang release version like below
+- You can specify an Erlang release version like below
 
 ```
 erlang_version=18.2.1
@@ -160,7 +162,7 @@ erlang_version=18.2.1
 
 #### Specifying config vars to export at compile time
 
-* To set a config var on your heroku node you can exec from the shell:
+- To set a config var on your heroku node you can exec from the shell:
 
 ```
 heroku config:set MY_VAR=the_value
@@ -168,9 +170,9 @@ heroku config:set MY_VAR=the_value
 
 ## Other notes
 
-* Add your own `Procfile` to your application, else the default web task `mix run --no-halt` will be used.
+- Add your own `Procfile` to your application, else the default web task `mix run --no-halt` will be used.
 
-* Your application should build embedded and start permanent. Build embedded will consolidate protocols for a performance boost, start permanent will ensure that Heroku restarts your application if it crashes. See below for an example of how to use these features in your Mix project:
+- Your application should build embedded and start permanent. Build embedded will consolidate protocols for a performance boost, start permanent will ensure that Heroku restarts your application if it crashes. See below for an example of how to use these features in your Mix project:
 
   ```elixir
   defmodule MyApp.Mixfile do
@@ -185,17 +187,18 @@ heroku config:set MY_VAR=the_value
   end
   ```
 
-* The buildpack will execute the commands configured in `hook_pre_compile` and/or `hook_post_compile` in the root directory of your application before/after it has been compiled (respectively). These scripts can be used to build or prepare things for your application, for example compiling assets.
-* The buildpack will execute the commands configured in `hook_pre_fetch_dependencies` in the root directory of your application before it fetches the application dependencies. This script can be used to clean certain dependencies before fetching new ones.
+- The buildpack will execute the commands configured in `hook_pre_compile` and/or `hook_post_compile` in the root directory of your application before/after it has been compiled (respectively). These scripts can be used to build or prepare things for your application, for example compiling assets.
+- The buildpack will execute the commands configured in `hook_pre_fetch_dependencies` in the root directory of your application before it fetches the application dependencies. This script can be used to clean certain dependencies before fetching new ones.
 
 ## Development
 
-* Build scripts to build erlang are at <https://github.com/HashNuke/heroku-buildpack-elixir-otp-builds>
-* Sample app to test is available at <https://github.com/HashNuke/heroku-buildpack-elixir-test>
+- Build scripts to build erlang are at <https://github.com/HashNuke/heroku-buildpack-elixir-otp-builds>
+- Sample app to test is available at <https://github.com/HashNuke/heroku-buildpack-elixir-test>
 
 ## Testing
 
 To run tests
+
 ```
 git clone https://github.com/HashNuke/heroku-buildpack-elixir
 export BUILDPACK="$(pwd)/heroku-buildpack-elixir"
